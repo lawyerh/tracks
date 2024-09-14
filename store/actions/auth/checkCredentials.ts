@@ -34,7 +34,6 @@ export const checkCredentials = createAsyncThunk(
       status: response.status,
       message: response.message ? response.message : null,
     };
-    console.log(response);
     return data;
   }
 );

@@ -9,7 +9,7 @@ import { changeUsername, changePassword, checkCredentials } from "store";
 import { useAppSelector, useAppDispatch } from "@/hooks/hooks";
 
 export default function LogIn() {
-  const { username, password } = useAppSelector((state) => state.user);
+  const { username, password, error } = useAppSelector((state) => state.user);
   const navigation: NavigationProp<ParamListBase> = useNavigation();
   const dispatch = useAppDispatch();
 
@@ -24,6 +24,7 @@ export default function LogIn() {
   return (
     <View style={style.container}>
       <Text style={style.header}>Log in to Tracker</Text>
+      {error ? <Text style={style.error}>{error}</Text> : null}
       <Text style={style.label}>Username</Text>
       <TextInput
         style={style.input}
@@ -56,6 +57,11 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: -1,
     marginBottom: 50,
+  },
+  error: {
+    fontSize: 18,
+    color: "red",
+    marginBottom: 10,
   },
   input: {
     borderColor: "black",

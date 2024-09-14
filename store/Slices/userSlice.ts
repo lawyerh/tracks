@@ -26,9 +26,22 @@ const userSlice = createSlice({
     builder.addCase(
       checkCredentials.fulfilled,
       (state, action: PayloadAction<CredentialsResponse>) => {
-        console.log("fulfilled", action.payload);
+        if (action.payload.token) {
+          state.error = null;
+          state.username = "";
+          state.password = "";
+          state.id = action.payload.token;
+        } else {
+          if (action.payload.status === 422) {
+            state.error = "Incorrect username or password";
+          }
+        }
       }
     );
+
+    builder.addCase(checkCredentials.pending, () => {
+      console.log("pending");
+    });
   },
 });
 
