@@ -3,6 +3,7 @@ import { checkCredentials } from "store/actions/auth/checkCredentials";
 import User from "types/User";
 import { CredentialsResponse } from "store/actions/auth/checkCredentials";
 import { RootState } from "store";
+import { validateNewUser } from "store/actions/auth/validateNewUser";
 
 const initialState: User = {
   id: null,
@@ -32,7 +33,7 @@ const userSlice = createSlice({
           state.password = "";
           state.id = action.payload.token;
         } else {
-          if (action.payload.status === 422) {
+          if (action.payload.status != 200) {
             state.error = "Incorrect username or password";
           }
         }
@@ -40,6 +41,27 @@ const userSlice = createSlice({
     );
 
     builder.addCase(checkCredentials.pending, () => {
+      // Could add logic here to display a loader
+      console.log("pending");
+    });
+
+    builder.addCase(
+      validateNewUser.fulfilled,
+      (state, action: PayloadAction<CredentialsResponse>) => {
+        if (action.payload.token) {
+          state.error = null;
+          state.username = "";
+          state.password = "";
+          state.id = action.payload.token;
+        } else {
+          if (action.payload.status != 200) {
+            state.error = "Incorrect username or password";
+          }
+        }
+      }
+    );
+
+    builder.addCase(validateNewUser.pending, () => {
       console.log("pending");
     });
   },

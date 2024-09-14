@@ -4,12 +4,26 @@ import {
   NavigationProp,
   useNavigation,
 } from "@react-navigation/native";
+import { CredentialsBody } from "types/Credentials";
+import { useAppSelector, useAppDispatch } from "@/hooks/hooks";
 
 export default function SignUp() {
+  const { username, password, error } = useAppSelector((state) => state.user);
   const navigation: NavigationProp<ParamListBase> = useNavigation();
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = () => {
+    const credentials: CredentialsBody = {
+      username,
+      password,
+    };
+    // dispatch(checkCredentials(credentials));
+  };
+
   return (
     <View style={style.container}>
       <Text style={style.header}>Sign up for Tracker</Text>
+      {error ? <Text style={style.error}>{error}</Text> : null}
       <Text style={style.label}>Username</Text>
       <TextInput style={style.input} />
       <Text style={style.label}>Password</Text>
@@ -33,6 +47,11 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: -1,
     marginBottom: 50,
+  },
+  error: {
+    fontSize: 18,
+    color: "red",
+    marginBottom: 10,
   },
   input: {
     borderColor: "black",
