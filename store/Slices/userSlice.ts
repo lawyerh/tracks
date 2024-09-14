@@ -55,7 +55,7 @@ const userSlice = createSlice({
           state.id = action.payload.token;
         } else {
           if (action.payload.status != 200) {
-            state.error = "Incorrect username or password";
+            state.error = "Must include username and password";
           }
         }
       }

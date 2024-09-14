@@ -8,6 +8,7 @@ export const validateNewUser = createAsyncThunk(
   async (credentials: CredentialsBody): Promise<CredentialsResponse> => {
     // If any validations, do them now
     const { username, password } = credentials;
+    if (!username || !password) return { status: 500 };
     const response = await axios
       .post(`${BASE_URL}/signup`, {
         username,

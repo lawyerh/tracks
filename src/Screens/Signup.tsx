@@ -6,6 +6,7 @@ import {
 } from "@react-navigation/native";
 import { CredentialsBody } from "types/Credentials";
 import { useAppSelector, useAppDispatch } from "@/hooks/hooks";
+import { validateNewUser } from "store/actions/auth/validateNewUser";
 
 export default function SignUp() {
   const { username, password, error } = useAppSelector((state) => state.user);
@@ -18,6 +19,7 @@ export default function SignUp() {
       password,
     };
     // dispatch(checkCredentials(credentials));
+    dispatch(validateNewUser(credentials));
   };
 
   return (
@@ -28,7 +30,7 @@ export default function SignUp() {
       <TextInput style={style.input} />
       <Text style={style.label}>Password</Text>
       <TextInput secureTextEntry={true} style={style.input} />
-      <Pressable style={style.button}>
+      <Pressable onPress={handleSubmit} style={style.button}>
         <Text style={{ textAlign: "center", fontSize: 18 }}>Sign Up</Text>
       </Pressable>
       <Text style={style.link} onPress={() => navigation.navigate("login")}>
