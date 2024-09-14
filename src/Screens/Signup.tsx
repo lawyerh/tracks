@@ -10,10 +10,10 @@ export default function SignUp() {
   return (
     <View style={style.container}>
       <Text style={style.header}>Sign up for Tracker</Text>
-      <Text style={style.label}>Email</Text>
+      <Text style={style.label}>Username</Text>
       <TextInput style={style.input} />
       <Text style={style.label}>Password</Text>
-      <TextInput style={style.input} />
+      <TextInput secureTextEntry={true} style={style.input} />
       <Pressable style={style.button}>
         <Text style={{ textAlign: "center", fontSize: 18 }}>Sign Up</Text>
       </Pressable>
