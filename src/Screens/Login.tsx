@@ -4,7 +4,7 @@ import {
   NavigationProp,
   useNavigation,
 } from "@react-navigation/native";
-import { CredentialsBody } from "store/actions/auth/checkCredentials";
+import { CredentialsBody } from "types/Credentials";
 import { changeUsername, changePassword, checkCredentials } from "store";
 import { useAppSelector, useAppDispatch } from "@/hooks/hooks";
 

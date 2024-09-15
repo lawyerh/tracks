@@ -1,5 +1,5 @@
 export default interface User {
-  id: string | null;
+  isLoggedIn: boolean;
   username: string;
   password: string;
   error: string | null;

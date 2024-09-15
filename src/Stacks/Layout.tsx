@@ -3,19 +3,15 @@ import UserStack from "./UserStack";
 import TrackStack from "./TrackStack";
 // ** PARENT NAV IMPORTS **
 import { NavigationContainer } from "@react-navigation/native";
- // ** REDUX IMPORTS **
-import { useSelector } from "react-redux";
-import { Store } from "store";
+// ** REDUX IMPORTS **
+import { useAppSelector } from "@/hooks/hooks";
 
 export default function Layout() {
-  const user = useSelector((state: Store) => state.user.id);
-
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  
   return (
-    <NavigationContainer >
-      {user === null ? (
-        <UserStack />
-      ) : <TrackStack />
-      }
+    <NavigationContainer>
+      {isLoggedIn ? <TrackStack /> : <UserStack />}
     </NavigationContainer>
   );
 }

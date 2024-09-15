@@ -2,9 +2,11 @@ import CreateTrack from "@/Screens/CreateTrack";
 import Account from "@/Screens/Account";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TrackListStack from "./TrackListStack";
+import { useAppSelector } from "@/hooks/hooks";
 
 const Tab = createBottomTabNavigator();
 export default function TrackStack() {
+  const { username } = useAppSelector((state) => state.user);
   return (
     <Tab.Navigator
       initialRouteName="Tracks"
@@ -23,7 +25,7 @@ export default function TrackStack() {
       <Tab.Screen
         name="Account"
         component={Account}
-        options={{ title: "Account Settings" }}
+        options={{ title: username }}
       />
     </Tab.Navigator>
   );
